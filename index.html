@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photo Car Game</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <!-- Option 1: Include in HTML -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.2.2/font/bootstrap-icons.css">
+    <style>
+        body{
+            background: #646d74;
+            background-size: cover !important;
+            background-repeat: no-repeat !important;
+        }
+        #div1 {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background: url('car-front.svg');
+            background-repeat: no-repeat;
+           background-size: contain;
+           top: 80%;
+    left: 55%;
+
+        }
+
+        .div2 {
+            position: absolute;
+            width: 70px;
+            height: 70px;
+            /* background-color: red; */
+            /* width: 50px;
+            height: 50px; */
+            background: url('balloon.svg');
+            background-repeat: no-repeat;
+           background-size: contain;
+            /*left: 200px;  Adjust the position as needed */
+            /*  top: 200px;  Adjust the position as needed */
+            left: 54%;
+    top: 60%;
+        }
+        div#joyDiv {
+    position: absolute;
+    top: 70%;
+    left: 65%;
+}
+.card{
+    background: #212529;
+    color: white;
+}
+.card-header{
+    z-index: 999;
+}
+img#photo {
+    width: 100vw;
+    height: 100vh;
+    display: none;
+}
+.rotate{
+    transform: rotate(90deg);
+}
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="joy.js"></script>
+</head>
+<body>
+    <div class="card">
+        <div class="card-header">
+            Photo Car Game
+           <button id="next" class="btn btn-primary">Next</button>
+           <button id="rotate" class="btn btn-primary">Rotate</button>
+        </div>
+        <!-- <div class="card-body">
+          <h5 class="card-title">Special title treatment</h5>
+          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+          <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div> -->
+        <img id="photo" class="rotate" src="blank.png" alt="Your Image">
+      </div>
+    <div id="joyDiv" style="width: 200px; height: 200px; margin-bottom: 20px;"></div>
+    <div id="div1">
+        <!-- <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-airplane" viewBox="0 0 16 16">
+            <path d="M6.428 1.151C6.708.591 7.213 0 8 0s1.292.592 1.572 1.151C9.861 1.73 10 2.431 10 3v3.691l5.17 2.585a1.5 1.5 0 0 1 .83 1.342V12a.5.5 0 0 1-.582.493l-5.507-.918-.375 2.253 1.318 1.318A.5.5 0 0 1 10.5 16h-5a.5.5 0 0 1-.354-.854l1.319-1.318-.376-2.253-5.507.918A.5.5 0 0 1 0 12v-1.382a1.5 1.5 0 0 1 .83-1.342L6 6.691V3c0-.568.14-1.271.428-1.849Zm.894.448C7.111 2.02 7 2.569 7 3v4a.5.5 0 0 1-.276.447l-5.448 2.724a.5.5 0 0 0-.276.447v.792l5.418-.903a.5.5 0 0 1 .575.41l.5 3a.5.5 0 0 1-.14.437L6.708 15h2.586l-.647-.646a.5.5 0 0 1-.14-.436l.5-3a.5.5 0 0 1 .576-.411L15 11.41v-.792a.5.5 0 0 0-.276-.447L9.276 7.447A.5.5 0 0 1 9 7V3c0-.432-.11-.979-.322-1.401C8.458 1.159 8.213 1 8 1c-.213 0-.458.158-.678.599Z"/>
+        </svg> -->
+    </div>
+    <div class="div2"><!--1234--></div>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#next').on("click", function() {
+                console.log('next');
+                var randomNumber = Math.floor(Math.random() * 100) + 1;
+                $('#photo').attr('src', 'photos/0 ('+randomNumber+').png');
+                $('#photo').show();
+                //$('body').css('background','url("photos/0 ('+randomNumber+').png")');
+            });
+
+            $('#rotate').click(function(){
+                $('#photo').toggleClass('rotate');
+            });
+
+
+            var div = $('#div1');
+            var joy1 = new JoyStick('joyDiv', {}, function(stickData) {
+                // Your JoyStick code here
+            });
+
+            setInterval(function(){
+                var posx = joy1.GetPosX();
+                var div1top = parseInt(div.css('top')) - 100;
+                var div1left = parseInt(div.css('left')) - 100;
+                var div1top1 = parseInt(div.css('top'));// - 100;
+                var div1left1 = parseInt(div.css('left'));// - 100;
+                var div2 = $('.div2');
+                var div2top = parseInt(div2.css('top'));
+                var div2left = parseInt(div2.css('left'));
+                var div1Width = div.width();
+                var div1Height = div.height();
+                var div2Width = div2.width();
+                var div2Height = div2.height();
+
+                // Check for collision
+                if (
+                    div1top1 + div1Height > div2top &&
+                    div1top1 < div2top + div2Height &&
+                    div1left + div1Width > div2left &&
+                    div1left < div2left + div2Width
+                ) {
+                    console.log('!');
+                    // Collision detected, apply animation to div2
+                    var windowWidth = $(window).width();
+                var windowHeight = $(window).height();
+                    // div2.animate({
+                    //     left: Math.random() * windowWidth//* * 500, // Change the range as needed
+                    //     top: Math.random() * windowHeight //500,  // Change the range as needed
+                    // }, 500); // Adjust the duration as needed
+                    div2.css(
+                        'left', Math.random() * windowWidth,//* * 500, // Change the range as needed
+                        //top: Math.random() * windowHeight //500,  // Change the range as needed
+                    ); //, }{:500 Adjust the duration as needed
+
+                        div2.css(
+                        //'left', Math.random() * windowWidth,//* * 500, // Change the range as needed
+                        'top', Math.random() * windowHeight //500,  // Change the range as needed
+                    );
+                } else {
+                    // No collision, continue moving div1
+                    div.css('top', div1top + joy1.GetPosY());
+                    div.css('left', div1left + joy1.GetPosX());
+                }
+            }, 50);
+        });
+    </script>
+</body>
+</html>
