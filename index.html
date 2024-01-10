@@ -16,8 +16,8 @@
         }
         #div1 {
             position: absolute;
-            width: 50px;
-            height: 50px;
+            width: 35px;
+            height: 35px;
             background: url('car-front.svg');
             background-repeat: no-repeat;
            background-size: contain;
@@ -44,7 +44,7 @@
         div#joyDiv {
     position: absolute;
     top: 70%;
-    left: 65%;
+    left: 75%;
 }
 .card{
     background: #212529;
@@ -81,16 +81,17 @@ img#photo {
             Photo Car Game
            <button id="next" class="btn btn-primary">Next</button>
            <button id="rotate" class="btn btn-primary">Rotate</button>
+           <button id="center" class="btn btn-primary">Center</button>
         </div>
         <!-- <div class="card-body">
           <h5 class="card-title">Special title treatment</h5>
           <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
           <a href="#" class="btn btn-primary">Go somewhere</a>
         </div> -->
-        <!-- <img id="photo" class="rotate" src="blank.png" alt="Your Image"> -->
-        <div class="card-body rotate">
+        <img id="photo" class="" src="blank.png" alt="Your Image">
+        <!-- <div class="card-body rotate">
             
-        </div>
+        </div> -->
       </div>
     <div id="joyDiv" style="width: 200px; height: 200px; margin-bottom: 20px;"></div>
     <div id="div1">
@@ -105,13 +106,17 @@ img#photo {
                 console.log('next');
                 var randomNumber = Math.floor(Math.random() * 600) + 1;
                 console.log(randomNumber);
-                //$('#photo').attr('src', 'photos/0 ('+randomNumber+').png');
+                $('#photo').attr('src', 'photos/0 ('+randomNumber+').png');
                 $('#photo').show();
-                $('.card-body').css('background','url("photos/0 ('+randomNumber+').png")');
+                //$('.card-body').css('background','url("photos/0 ('+randomNumber+').png")');
             });
 
             $('#rotate').click(function(){
                 $('.card-body').toggleClass('rotate');
+            });
+            $('#center').click(function(){
+                $('#div1').css('top','50%');
+                $('#div1').css('left','50%');
             });
 
 
